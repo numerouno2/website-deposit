@@ -21,7 +21,7 @@ h1 {
 
 .content {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 20px;
 }
 
@@ -30,11 +30,11 @@ h1 {
 }
 
 .history-container {
-    max-width: 60%;
+    max-width: 100%; /* Mengisi keseluruhan lebar di perangkat mobile */
 }
 
 .form-container {
-    max-width: 40%;
+    max-width: 100%; /* Mengisi keseluruhan lebar di perangkat mobile */
     background-color: #f7f9fc;
     padding: 20px;
     border-radius: 8px;
@@ -115,4 +115,19 @@ button:hover {
 
 #history li span.date {
     color: #888;
+}
+
+/* Media query untuk menyesuaikan tata letak pada layar yang lebih kecil */
+@media (min-width: 768px) {
+    .content {
+        flex-direction: row;
+    }
+
+    .history-container {
+        max-width: 60%; /* Menyesuaikan lebar pada layar yang lebih besar */
+    }
+
+    .form-container {
+        max-width: 40%; /* Menyesuaikan lebar pada layar yang lebih besar */
+    }
 }
