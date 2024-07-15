@@ -1,30 +1,39 @@
-const deposits = JSON.parse(localStorage.getItem('deposits')) || [];
+const deposits = JSON.parse(localStorage.getItem("deposits")) || [];
 
-document.addEventListener('DOMContentLoaded', function() {
-    const historyList = document.getElementById('history');
-    deposits.forEach(deposit => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
+document.addEventListener("DOMContentLoaded", function () {
+  const historyList = document.getElementById("history");
+  deposits.forEach((deposit, index) => {
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `
             <span class="name">${deposit.name}</span>
-            <span class="amount">${deposit.amount.toLocaleString('id-ID')} Rupiah</span>
-            <span class="date">Start: ${new Date(deposit.startDate).toLocaleDateString('id-ID')} - Done: ${new Date(deposit.endDate).toLocaleDateString('id-ID')}</span>
+            <span class="amount">${deposit.amount.toLocaleString(
+              "id-ID"
+            )} Rupiah</span>
+            <span class="date">Mulai: ${new Date(
+              deposit.startDate
+            ).toLocaleDateString("id-ID")} - Selesai: ${new Date(
+      deposit.endDate
+    ).toLocaleDateString("id-ID")}</span>
+            <button onclick="removeDeposit(${index})">Remove</button>
         `;
-        historyList.appendChild(listItem);
-    });
+    historyList.appendChild(listItem);
+  });
 });
 
-document.getElementById('depositForm').addEventListener('submit', function(event) {
+document
+  .getElementById("depositForm")
+  .addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const name = document.getElementById('name').value;
-    const amount = parseInt(document.getElementById('amount').value);
-    const messageDiv = document.getElementById('message');
-    const historyList = document.getElementById('history');
+    const name = document.getElementById("name").value;
+    const amount = parseInt(document.getElementById("amount").value);
+    const messageDiv = document.getElementById("message");
+    const historyList = document.getElementById("history");
     const date = new Date();
 
     if (amount < 2000) {
-        messageDiv.textContent = 'The minimum deposit amount is 2000 rupiah!';
-        return;
+      messageDiv.textContent = "Jumlah deposit minimal adalah 2000 rupiah!";
+      return;
     }
 
     const daysCovered = Math.floor(amount / 2000);
@@ -32,38 +41,49 @@ document.getElementById('depositForm').addEventListener('submit', function(event
     let currentDate = new Date(date);
 
     while (workDaysCount < daysCovered) {
-        currentDate.setDate(currentDate.getDate() + 1);
-        const dayOfWeek = currentDate.getDay();
-        if (dayOfWeek !== 0 && dayOfWeek !== 6) { // Bukan hari Sabtu atau Minggu
-            workDaysCount++;
-        }
+      currentDate.setDate(currentDate.getDate() + 1);
+      const dayOfWeek = currentDate.getDay();
+      if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+        // Bukan hari Sabtu atau Minggu
+        workDaysCount++;
+      }
     }
 
     const endDate = new Date(currentDate);
 
-    const listItem = document.createElement('li');
+    const listItem = document.createElement("li");
+    const index = deposits.length;
     listItem.innerHTML = `
         <span class="name">${name}</span>
-        <span class="amount">${amount.toLocaleString('id-ID')} Rupiah</span>
-        <span class="date">Start: ${date.toLocaleDateString('id-ID')} - Done: ${endDate.toLocaleDateString('id-ID')}</span>
+        <span class="amount">${amount.toLocaleString("id-ID")} Rupiah</span>
+        <span class="date">Mulai: ${date.toLocaleDateString(
+          "id-ID"
+        )} - Selesai: ${endDate.toLocaleDateString("id-ID")}</span>
+        <button onclick="removeDeposit(${index})">Remove</button>
     `;
     historyList.appendChild(listItem);
 
     if (amount >= 100000) {
-        messageDiv.textContent = 'Your deposit was successful!';
+      messageDiv.textContent = "Terima kasih atas deposit besar Anda!";
     } else {
-        messageDiv.textContent = '';
+      messageDiv.textContent = "";
     }
 
     const deposit = {
-        name: name,
-        amount: amount,
-        startDate: date,
-        endDate: endDate
+      name: name,
+      amount: amount,
+      startDate: date,
+      endDate: endDate,
     };
 
     deposits.push(deposit);
-    localStorage.setItem('deposits', JSON.stringify(deposits));
+    localStorage.setItem("deposits", JSON.stringify(deposits));
 
-    document.getElementById('depositForm').reset();
-});
+    document.getElementById("depositForm").reset();
+  });
+
+function removeDeposit(index) {
+  deposits.splice(index, 1);
+  localStorage.setItem("deposits", JSON.stringify(deposits));
+  location.reload();
+}

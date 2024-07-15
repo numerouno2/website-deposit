@@ -1,133 +1,148 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.history-container, .form-container {
-    flex: 1;
+.history-container,
+.form-container {
+  flex: 1;
 }
 
 .history-container {
-    max-width: 100%; /* Mengisi keseluruhan lebar di perangkat mobile */
+  max-width: 100%;
 }
 
 .form-container {
-    max-width: 100%; /* Mengisi keseluruhan lebar di perangkat mobile */
-    background-color: #f7f9fc;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  background-color: #f7f9fc;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-input[type="text"], input[type="number"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 button {
-    padding: 12px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007BFF;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 #message {
-    margin-top: 20px;
-    font-weight: bold;
-    text-align: center;
-    color: red;
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: red;
 }
 
 #history {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 #history li {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 }
 
 #history li:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 #history li span {
-    flex: 1;
+  flex: 1;
 }
 
 #history li span.name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #history li span.date {
-    color: #888;
+  color: #888;
 }
 
-/* Media query untuk menyesuaikan tata letak pada layar yang lebih kecil */
+#history li button {
+  align-self: flex-start;
+  padding: 5px 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#history li button:hover {
+  background-color: darkred;
+}
+
 @media (min-width: 768px) {
-    .content {
-        flex-direction: row;
-    }
+  .content {
+    flex-direction: row;
+  }
 
-    .history-container {
-        max-width: 60%; /* Menyesuaikan lebar pada layar yang lebih besar */
-    }
+  .history-container {
+    max-width: 60%;
+  }
 
-    .form-container {
-        max-width: 40%; /* Menyesuaikan lebar pada layar yang lebih besar */
-    }
+  .form-container {
+    max-width: 40%;
+  }
 }
