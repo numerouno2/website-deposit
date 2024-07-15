@@ -9,14 +9,28 @@ document.addEventListener("DOMContentLoaded", function () {
             <span class="amount">${deposit.amount.toLocaleString(
               "id-ID"
             )} Rupiah</span>
-            <span class="date">Mulai: ${new Date(
+            <span class="date">Start: ${new Date(
               deposit.startDate
-            ).toLocaleDateString("id-ID")} - Selesai: ${new Date(
+            ).toLocaleDateString("id-ID")} - Done: ${new Date(
       deposit.endDate
     ).toLocaleDateString("id-ID")}</span>
             <button onclick="removeDeposit(${index})">Remove</button>
         `;
     historyList.appendChild(listItem);
+  });
+
+  const dateOption = document.getElementById("dateOption");
+  const manualDate = document.getElementById("manualDate");
+  const manualDateLabel = document.getElementById("manualDateLabel");
+
+  dateOption.addEventListener("change", function () {
+    if (dateOption.value === "manual") {
+      manualDate.style.display = "block";
+      manualDateLabel.style.display = "block";
+    } else {
+      manualDate.style.display = "none";
+      manualDateLabel.style.display = "none";
+    }
   });
 });
 
@@ -29,10 +43,19 @@ document
     const amount = parseInt(document.getElementById("amount").value);
     const messageDiv = document.getElementById("message");
     const historyList = document.getElementById("history");
-    const date = new Date();
+    const dateOption = document.getElementById("dateOption").value;
+    let date;
+
+    if (dateOption === "manual") {
+      date = new Date(document.getElementById("manualDate").value);
+      // Adjust for time zone differences
+      date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+    } else {
+      date = new Date();
+    }
 
     if (amount < 2000) {
-      messageDiv.textContent = "Jumlah deposit minimal adalah 2000 rupiah!";
+      messageDiv.textContent = "The minimum deposit amount is 2000 rupiah!";
       return;
     }
 
@@ -64,7 +87,7 @@ document
     historyList.appendChild(listItem);
 
     if (amount >= 100000) {
-      messageDiv.textContent = "Terima kasih atas deposit besar Anda!";
+      messageDiv.textContent = "Thank you for your big deposit!";
     } else {
       messageDiv.textContent = "";
     }
